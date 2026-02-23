@@ -5,7 +5,7 @@ A powerful GitHub Profile Analyzer built with React.js that gives any developer 
 ---
 
 ## 🚀 Live Demo
-Coming soon...
+https://dev-scope-bice.vercel.app/
 
 ---
 
