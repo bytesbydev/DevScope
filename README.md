@@ -188,7 +188,6 @@ This project is licensed under the MIT License.
 **Devendra Rawat**
 
 - GitHub: [@bytesbydev](https://github.com/bytesbydev)
-- LinkedIn: Add your LinkedIn profile here
 
 ---
 
