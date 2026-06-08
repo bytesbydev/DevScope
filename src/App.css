@@ -1,155 +1,103 @@
-
-:root {
-  --bg: #0a0a0f;
-  --surface: #111118;
-  --card: #16161f;
-  --border: #2a2a3a;
-  --accent: #7c6aff;
-  --accent2: #ff6a9b;
-  --accent3: #6affda;
-  --text: #e8e8f0;
-  --muted: #6b6b80;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: "Syne", sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(ellipse at 20% 20%, rgba(124, 106, 255, 0.08) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 80%, rgba(255, 106, 155, 0.06) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, rgba(106, 255, 218, 0.04) 0%, transparent 60%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.app {
-  position: relative;
-  z-index: 1;
-}
+.app { position: relative; z-index: 1; }
 
 .app-container {
-  max-width: 1100px;
+  max-width: 1160px;
   margin: 0 auto;
-  padding: 0 20px 60px;
+  padding: 0 24px 90px;
 }
 
+/* ── Error ── */
 .app-error {
   text-align: center;
-  color: #ff6a9b;
-  font-family: "Space Mono", monospace;
-  font-size: 14px;
-  margin-top: -30px;
-  margin-bottom: 24px;
-  padding: 12px 20px;
-  background: rgba(255, 106, 155, 0.08);
-  border: 1px solid rgba(255, 106, 155, 0.2);
-  border-radius: 10px;
-  max-width: 580px;
-  margin-left: auto;
-  margin-right: auto;
+  color: #FB7185;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  margin: -16px auto 32px;
+  padding: 14px 28px;
+  background: rgba(251,113,133,0.08);
+  border: 1px solid rgba(251,113,133,0.25);
+  border-radius: 16px;
+  max-width: 600px;
+  backdrop-filter: blur(12px);
 }
 
+/* ── Loader ── */
 .app-loader {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 60px 0;
-  gap: 16px;
+  padding: 90px 0;
+  gap: 22px;
 }
 
-.loader-dots {
-  display: flex;
-  gap: 8px;
+.loader-ring {
+  position: relative;
+  width: 56px;
+  height: 56px;
 }
 
-.loader-dots span {
-  width: 10px;
-  height: 10px;
+.loader-ring::before, .loader-ring::after {
+  content: '';
+  position: absolute;
+  inset: 0;
   border-radius: 50%;
-  background: var(--accent);
-  animation: bounce 1.2s infinite;
+  border: 3px solid transparent;
 }
 
-.loader-dots span:nth-child(2) {
-  animation-delay: 0.2s;
-  background: var(--accent2);
+.loader-ring::before {
+  border-top-color: var(--violet);
+  border-right-color: var(--pink);
+  animation: spin 1s linear infinite;
 }
 
-.loader-dots span:nth-child(3) {
-  animation-delay: 0.4s;
-  background: var(--accent3);
+.loader-ring::after {
+  border-bottom-color: var(--cyan);
+  border-left-color: var(--orange);
+  animation: spin 1.4s linear infinite reverse;
+  inset: 8px;
 }
 
-@keyframes bounce {
-  0%, 80%, 100% {
-    transform: scale(0.7);
-    opacity: 0.4;
-  }
-  40% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
+@keyframes spin { to { transform: rotate(360deg); } }
 
 .loader-text {
-  font-family: "Space Mono", monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 13px;
-  color: var(--muted);
+  color: var(--muted2);
+  letter-spacing: 0.05em;
 }
 
+/* ── Results ── */
 .app-results {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  animation: fadeIn 0.5s ease;
+  animation: riseUp 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+@keyframes riseUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-.grid-main {
+/* ── Layout grids ── */
+.grid-top {
   display: grid;
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: 290px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.grid-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 20px;
 }
 
-.grid-right {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-@media (max-width: 768px) {
-  .grid-main {
-    grid-template-columns: 1fr;
-  }
+@media (max-width: 860px) {
+  .grid-top    { grid-template-columns: 1fr; }
+  .grid-bottom { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 500px) {
-  .app-container {
-    padding: 0 12px 40px;
-  }
+  .app-container { padding: 0 14px 60px; }
 }
