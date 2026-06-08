@@ -5,15 +5,11 @@ const SearchBar = ({ onSearch, loading }) => {
   const [username, setUsername] = useState("");
 
   const handleSearch = () => {
-    if (username.trim()) {
-      onSearch(username.trim());
-    }
+    if (username.trim()) onSearch(username.trim());
   };
 
   const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      handleSearch();
-    }
+    if (e.key === "Enter") handleSearch();
   };
 
   return (
