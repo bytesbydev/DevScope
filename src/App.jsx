@@ -11,16 +11,8 @@ import "./App.css";
 
 const App = () => {
   const {
-    user,
-    repos,
-    loading,
-    error,
-    fetchUser,
-    totalStars,
-    totalForks,
-    topRepos,
-    languageMap,
-    topLanguage,
+    user, repos, loading, error, fetchUser,
+    totalStars, totalForks, topRepos, languageMap, topLanguage,
   } = useGitHub();
 
   const scoreData = user ? calculateScore(user, repos, totalStars) : null;
@@ -28,27 +20,23 @@ const App = () => {
   return (
     <div className="app">
       <div className="app-container">
-        <Navbar />
 
+        <Navbar />
         <SearchBar onSearch={fetchUser} loading={loading} />
 
-        {error && (
-          <div className="app-error">{error}</div>
-        )}
+        {error && <div className="app-error">⚠ {error}</div>}
 
         {loading && (
           <div className="app-loader">
-            <div className="loader-dots">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-            <p className="loader-text">Fetching profile data...</p>
+            <div className="loader-ring" />
+            <p className="loader-text">// fetching profile data...</p>
           </div>
         )}
 
         {user && !loading && (
           <div className="app-results">
+
+            {/* Full-width score banner */}
             <ProfileScore
               score={scoreData.score}
               grade={scoreData.grade}
@@ -57,23 +45,26 @@ const App = () => {
               breakdown={scoreData.breakdown}
             />
 
-            <div className="grid-main">
+            {/* Profile card left · Stats grid right */}
+            <div className="grid-top">
               <ProfileCard user={user} />
-
-              <div className="grid-right">
-                <StatsCard
-                  user={user}
-                  totalStars={totalStars}
-                  totalForks={totalForks}
-                  topLanguage={topLanguage}
-                />
-                <LanguageChart languageMap={languageMap} />
-              </div>
+              <StatsCard
+                user={user}
+                totalStars={totalStars}
+                totalForks={totalForks}
+                topLanguage={topLanguage}
+              />
             </div>
 
-            <RepoList topRepos={topRepos} />
+            {/* Language chart · Top repos */}
+            <div className="grid-bottom">
+              <LanguageChart languageMap={languageMap} />
+              <RepoList topRepos={topRepos} />
+            </div>
+
           </div>
         )}
+
       </div>
     </div>
   );
