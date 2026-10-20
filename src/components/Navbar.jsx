@@ -5,9 +5,11 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="navbar-logo">
         <div className="navbar-icon">🐙</div>
-        <h1 className="navbar-title">GitHub Analyzer</h1>
+        <h1 className="navbar-title">DevScope</h1>
       </div>
-      <p className="navbar-tagline">// drop a username. get the full picture.</p>
+      <p className="navbar-tagline">
+        <span>// drop a username. get the full picture.</span>
+      </p>
     </nav>
   );
 };
